@@ -32,7 +32,7 @@ class DiscordBot(commands.Bot):
                     print(f'Loaded: {filename[:-3]}')
             await self.start(self.token)
 
-    def go(self):
+    def run(self):
         with contextlib.suppress(KeyboardInterrupt):
             asyncio.run(self.main())
     
@@ -66,4 +66,4 @@ class DiscordBot(commands.Bot):
 #     status=discord.Status.online
 #     )
 
-# bot.go()
+# bot.run()
