@@ -1,4 +1,5 @@
 */__pycache__/**
+__pycache__/**
 testing.py
 utils/profile_pic.png
 configurations/streamer_info.yaml
