@@ -76,4 +76,12 @@ async def on_connect() -> None:
 async def on_command_before_invoke(ctx : commands.Context) -> None:
     if not ctx.bot.bot_ready: raise BotNotReady
 
+bot = DiscordBot(
+    command_prefix="=", 
+    owner_id = 347524158181212161, 
+    intents = discord.Intents.all(), 
+    case_insensitive=True,
+    status=discord.Status.online
+    )
+
 bot.go()
