@@ -10,7 +10,7 @@ from os import listdir
 def get_token() -> str:
     return yaml_utils.load("configurations/text.config").get("discord_token")
 
-class Bot(commands.Bot):
+class DiscordBot(commands.Bot):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.token = get_token()
@@ -58,12 +58,12 @@ class Bot(commands.Bot):
     async def on_command_before_invoke(self, ctx : commands.Context) -> None:
         if not ctx.bot.bot_ready: raise BotNotReady
 
-bot = DiscordBot(
-    command_prefix="=", 
-    owner_id = 347524158181212161, 
-    intents = discord.Intents.all(), 
-    case_insensitive=True,
-    status=discord.Status.online
-    )
+# bot = DiscordBot(
+#     command_prefix="=", 
+#     owner_id = 347524158181212161, 
+#     intents = discord.Intents.all(), 
+#     case_insensitive=True,
+#     status=discord.Status.online
+#     )
 
-bot.go()
+# bot.go()
