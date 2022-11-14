@@ -32,7 +32,11 @@ class DiscordBot(commands.Bot):
                     print(f'Loaded: {filename[:-3]}')
             await self.start(self.token)
 
-    def run(self):
+    async def go(self):
+        with contextlib.suppress(KeyboardInterrupt):
+            await self.main()
+        
+    def manual_go(self):
         with contextlib.suppress(KeyboardInterrupt):
             asyncio.run(self.main())
     
@@ -58,12 +62,15 @@ class DiscordBot(commands.Bot):
     async def on_command_before_invoke(self, ctx : commands.Context) -> None:
         if not ctx.bot.bot_ready: raise BotNotReady
 
-# bot = DiscordBot(
-#     command_prefix="=", 
-#     owner_id = 347524158181212161, 
-#     intents = discord.Intents.all(), 
-#     case_insensitive=True,
-#     status=discord.Status.online
-#     )
+        
 
-# bot.run()
+if __name__ == "__main__":
+    bot = DiscordBot(
+        command_prefix="=", 
+        owner_id = 347524158181212161, 
+        intents = discord.Intents.all(), 
+        case_insensitive=True,
+        status=discord.Status.online
+        )
+
+    bot.manual_go()
