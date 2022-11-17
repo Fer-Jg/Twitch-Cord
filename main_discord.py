@@ -1,13 +1,9 @@
 from utils.StreamBotUtils import *
 
-def get_token() -> str:
-    return yaml_utils.load("configurations/text.config").get("discord_token")
-
 class DiscordBot(dcommands.Bot):
     def __init__(self, bridge : 'MainBot' = None, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.bridge = bridge
-        self.token = get_token()
         self.bot_ready = False
         self.creator_id = 347524158181212161
         self.creator = None
@@ -24,7 +20,7 @@ class DiscordBot(dcommands.Bot):
                 if filename.endswith('.py'):
                     await self.load_extension(f'cogs.{filename[:-3]}')
                     print(f'Loaded: {filename[:-3]}')
-            await self.start(self.token)
+            await self.start(SecretData.discord_token())
 
     async def go(self):
         with contextlib.suppress(KeyboardInterrupt):

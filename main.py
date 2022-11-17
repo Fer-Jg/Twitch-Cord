@@ -22,8 +22,6 @@ class MainBot():
                             self.twitch.go(), 
                             return_exceptions=True)
 
-
-
 if __name__ == "__main__":
     main = MainBot()
 

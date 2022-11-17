@@ -32,7 +32,11 @@ class SecretData():
 
     @staticmethod
     def discord_token():
-        return SecretData.config_data.get("token")
+        return SecretData.config_data().get("discord_token")
+    
+    @staticmethod
+    def twitch_token():
+        return SecretData.config_data().get("twitch_token")
     
     # @staticmethod
     # def twitch_data() -> Iterable[str, str, str]:

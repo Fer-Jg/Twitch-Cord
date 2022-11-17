@@ -1,11 +1,6 @@
 from utils.StreamBotUtils import *
 
-
-def get_token() -> str:
-    return yaml_utils.load("configurations/text.config").get("twitch_token")
-
 class TwitchBot(tcommands.Bot):
-    test = True
 
     def __init__(self, bridge: 'MainBot' = None):
         # Initialise our Bot with our access token, prefix and a list of channels to join on boot...
@@ -16,7 +11,7 @@ class TwitchBot(tcommands.Bot):
 
     async def go(self):
         print("Starting Twitch bot...")
-        super().__init__(token=get_token(), 
+        super().__init__(token=SecretData.twitch_token(), 
                         prefix='=', 
                         initial_channels=self.channels)
         await self.start()
