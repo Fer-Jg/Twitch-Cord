@@ -56,7 +56,9 @@ class DiscordBot(dcommands.Bot):
     async def on_command_before_invoke(self, ctx : dcommands.Context) -> None:
         if not ctx.bot.bot_ready: raise BotNotReady
 
-        
+    async def on_message(self, message):
+        print(f"[D] {message.author.name} : {message.content}")
+        await self.process_commands(message)
 
 if __name__ == "__main__":
     bot = DiscordBot(
