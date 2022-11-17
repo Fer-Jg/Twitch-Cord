@@ -1,10 +1,25 @@
-﻿import unicodedata
-from typing import Dict, Any, Optional
+﻿# Imports for other files
+from typing import TYPE_CHECKING
+if TYPE_CHECKING: from main import MainBot
+
 import discord
-from discord.ext import commands
+from discord.ext import commands as dcommands
+
+from twitchio import message as tmessage
+from twitchio.ext import commands as tcommands
+
+from dotmap import DotMap
+from typing import Union
+import datetime
+import contextlib
+from os import listdir
+import asyncio
+
+import unicodedata
+from typing import Dict, Any, Optional
 import aiohttp
 import yaml
-from dotmap import DotMap
+
 
 from os import getcwd
 testing = getcwd().startswith("C:")
@@ -34,10 +49,10 @@ class Colours():
     error = 0xff0000
 
 class DiscordUtils():
-    async def react(context : commands.Context, emoji : str):
+    async def react(context : dcommands.Context, emoji : str):
         if not context.interaction: await context.message.add_reaction(emoji)
     
-    async def send_webhook(ctx : commands.Context, content, username : str = None, avatar_url : str = None) -> None:
+    async def send_webhook(ctx : dcommands.Context, content, username : str = None, avatar_url : str = None) -> None:
         async with aiohttp.ClientSession() as session:
                 temp_webhook = await ctx.channel.create_webhook(name=f"{ctx.bot.user.name} webhook",
                 reason="Bot webhook.")
@@ -49,7 +64,7 @@ class DiscordUtils():
                 await webhook.send(content, username=username, avatar_url=avatar_url)
                 await temp_webhook.delete()
 
-    async def get_reference(ctx : commands.Context) -> discord.Message:
+    async def get_reference(ctx : dcommands.Context) -> discord.Message:
         '''
         Get the reference (message which is being replayed) from a `ctx`.
         '''
@@ -115,7 +130,7 @@ class yaml_utils():
 #
 #############################################################################################
 
-class BotNotReady(commands.CommandError):
+class BotNotReady(dcommands.CommandError):
     def __init__(self, message: Optional[str] = None, *args: Any) -> None:
         if message: super().__init__(message, *args)
         else: super().__init__("Bot not ready for command", *args)
