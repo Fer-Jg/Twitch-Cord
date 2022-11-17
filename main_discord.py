@@ -1,18 +1,12 @@
-import discord
-from discord.ext import commands
-import datetime
-import asyncio
-import contextlib
-from utils.AllUtils import *
 from utils.StreamBotUtils import *
-from os import listdir
 
 def get_token() -> str:
     return yaml_utils.load("configurations/text.config").get("discord_token")
 
-class DiscordBot(commands.Bot):
-    def __init__(self, *args, **kwargs):
+class DiscordBot(dcommands.Bot):
+    def __init__(self, bridge : 'MainBot' = None, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.bridge = bridge
         self.token = get_token()
         self.bot_ready = False
         self.creator_id = 347524158181212161
@@ -59,7 +53,7 @@ class DiscordBot(commands.Bot):
         await self.change_presence(activity=activity)
         print("bot is ready")
 
-    async def on_command_before_invoke(self, ctx : commands.Context) -> None:
+    async def on_command_before_invoke(self, ctx : dcommands.Context) -> None:
         if not ctx.bot.bot_ready: raise BotNotReady
 
         
