@@ -1,6 +1,8 @@
-streamer_name: ""
-twitch: ""
+streamer_name: "NameName"
+platform: "Twitch"
+stream_channel: "#NameTV"
+stream_link: "https://www.twitch.tv/Name"
+discord_link: "https://discord.gg/abc1x23"
 other_media:
-  instagram: ""
-  twitter: ""
-discord_link: ""
+  instagram: "@name_ig"
+  twitter: "@name_tw"
