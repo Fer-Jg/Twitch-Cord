@@ -6,7 +6,7 @@ from discord import Intents, Status
 # override methods to have names from proper functions even if they collide between libs
 
 class MainBot():
-    def __init__(self) -> None:
+    def __init__(self, d_test_channel: int=None) -> None:
         self.discord = DiscordBot(bridge=self,
             command_prefix="=", 
             owner_id = 347524158181212161, 
@@ -14,6 +14,7 @@ class MainBot():
             case_insensitive=True, 
             status=Status.online
             )
+        self.d_test_channel = d_test_channel
         self.twitch = TwitchBot(bridge=self)
 
     async def start(self) -> None:
