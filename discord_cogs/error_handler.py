@@ -1,3 +1,4 @@
+from types import TracebackType
 import discord
 import traceback
 import sys
@@ -102,10 +103,13 @@ class CommandErrorHandler(commands.Cog):
         else:
             print("There was an error.")
             await ctx.reply(f"Hubo un error con este comando, si crees que es importante repórtalo a {ctx.bot.creator}.")
-            temp_tb = "".join(traceback.format_exception(type(error),error,error.__traceback__))
-            tb_dict = {"traceback" : temp_tb, "type" : type(error),
-                        "author" : ctx.author, "link" : f"{ctx.message.jump_url}"}
-            ctx.bot.tracebacks.append(tb_dict)
+            try:
+                temp_tb = "".join(traceback.format_exception(type(error),error,error.__traceback__))
+                tb_dict = {"traceback" : temp_tb, "type" : type(error),
+                            "author" : ctx.author, "link" : f"{ctx.message.jump_url}"}
+                ctx.bot.tracebacks.append(tb_dict)
+            except Exception as e:
+                print(e)
             print('Ignoring exception in command {}:'.format(ctx.command), file=sys.stderr)
             traceback.print_exception(type(error), error, error.__traceback__, file=sys.stderr)
 
