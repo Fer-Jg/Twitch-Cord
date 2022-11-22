@@ -1,11 +1,12 @@
 ﻿# Imports for other files
 from typing import TYPE_CHECKING
-if TYPE_CHECKING: from main import MainBot
+if TYPE_CHECKING: from bridge import MainBot
 
 import discord
 from discord.ext import commands as dcommands
 
 from twitchio import message as tmessage
+from twitchio import Channel as tChannel
 from twitchio.ext import commands as tcommands
 
 from dotmap import DotMap
