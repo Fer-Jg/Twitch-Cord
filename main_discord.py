@@ -1,4 +1,4 @@
-from utils.StreamBotUtils import *
+from streamer_things.StreamBotUtils import *
 
 class DiscordBot(dcommands.Bot):
     def __init__(self, bridge : 'MainBot' = None, *args, **kwargs):
@@ -16,9 +16,9 @@ class DiscordBot(dcommands.Bot):
         """Starts the bot properly"""
         async with self:
             self.uptime = datetime.datetime.utcnow()
-            for filename in listdir('./cogs'):
+            for filename in listdir('./discord_cogs'):
                 if filename.endswith('.py'):
-                    await self.load_extension(f'cogs.{filename[:-3]}')
+                    await self.load_extension(f'discord_cogs.{filename[:-3]}')
                     print(f'Loaded: {filename[:-3]}')
             await self.start(SecretData.discord_token())
 
@@ -54,6 +54,7 @@ class DiscordBot(dcommands.Bot):
 
     async def on_message(self, message):
         print(f"[D] {message.author.name} : {message.content}")
+        if self.bridge: await self.bridge.twitch_message()
         await self.process_commands(message)
 
 if __name__ == "__main__":
