@@ -30,13 +30,13 @@ class TwitchBot(tcommands.Bot):
                 \r|Listening to: {self.channels}
                 \r----------------------------------''')
     
-    async def event_message(self, message : tmessage.Message):
-        if message.echo: return
-        print(f'''[T] {message.author.name}: {message.content}''')
-        if self.bridge:
-            await self.bridge.discord_message(channel=(self.bridge.d_test_channel 
-            if self.bridge.d_test_channel else self.discord_link))
-        await self.handle_commands(message)
+    # async def event_message(self, message : tmessage.Message):
+    #     if message.echo: return
+    #     print(f'''[T] {message.author.name}: {message.content}''')
+    #     if self.bridge:
+    #         await self.bridge.discord_message(channel=(self.bridge.d_test_channel 
+    #         if self.bridge.d_test_channel else self.discord_link))
+    #     await self.handle_commands(message)
 
     @tcommands.command()
     async def ping(self, ctx: tcommands.Context):
