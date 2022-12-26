@@ -24,6 +24,12 @@ class TwitchBot(tcommands.Bot):
         return self.get_channel(self.channels[0].replace("#",""))
 
     async def event_ready(self):
+        self.uptime = datetime.datetime.utcnow()
+        tcog = "cogs_twitch"
+        for filename in listdir(f'./{tcog}'):
+            if filename.endswith('.py'):
+                self.load_module(f'{tcog}.{filename[:-3]}')
+                print(f'Loaded cog: {filename[:-3]}')
         print(f'''----------------------------------
                 \r|Logged in as | {self.nick}
                 \r|User id is | {self.user_id}
@@ -35,7 +41,7 @@ class TwitchBot(tcommands.Bot):
     #     print(f'''[T] {message.author.name}: {message.content}''')
     #     if self.bridge:
     #         await self.bridge.discord_message(channel=(self.bridge.d_test_channel 
-    #         if self.bridge.d_test_channel else self.discord_link))
+    #         if self.bridge.d_test_channel else self.discord_link), message=message.content)
     #     await self.handle_commands(message)
 
     @tcommands.command()
