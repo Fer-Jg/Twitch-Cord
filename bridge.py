@@ -26,7 +26,8 @@ class MainBot():
     def launch(self):
         asyncio.run(self.start())
 
-    async def discord_message(self, channel:int, message:str = "hi Discord ♥"):
+    async def discord_message(self, channel:int = None, message:str = "hi Discord ♥"):
+        channel = channel if channel else 1049068501572264039
         channel = self.discord.get_channel(channel)
         await channel.send(message)
 
