@@ -16,9 +16,10 @@ class DiscordBot(dcommands.Bot):
         """Starts the bot properly"""
         async with self:
             self.uptime = datetime.datetime.utcnow()
-            for filename in listdir('./discord_cogs'):
+            dcog = "cogs_discord"
+            for filename in listdir(f'./{dcog}'):
                 if filename.endswith('.py'):
-                    await self.load_extension(f'discord_cogs.{filename[:-3]}')
+                    await self.load_extension(f'{dcog}.{filename[:-3]}')
                     print(f'Loaded: {filename[:-3]}')
             await self.start(SecretData.discord_token())
 
@@ -54,7 +55,7 @@ class DiscordBot(dcommands.Bot):
 
     # async def on_message(self, message):
     #     print(f"[D] {message.author.name} : {message.content}")
-    #     if self.bridge: await self.bridge.twitch_message()
+    #     if self.bridge: await self.bridge.twitch_message(message=message.content)
     #     await self.process_commands(message)
 
 if __name__ == "__main__":
