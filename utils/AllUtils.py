@@ -13,31 +13,43 @@ from dotmap import DotMap
 from typing import Union
 import datetime
 import contextlib
-from os import listdir
+from os import listdir, getenv
 import asyncio
 
 import unicodedata
 from typing import Dict, Any, Optional
 import aiohttp
 import yaml
+from dotenv import load_dotenv
 
 
 from os import getcwd
 testing = getcwd().startswith("C:")
+path_to_env = "configurations\.env"
 
 class SecretData():
 
     @staticmethod
     def config_data() -> Dict:
-        return yaml_utils.load("configurations/text.config")
+        load_dotenv(dotenv_path=path_to_env)
 
     @staticmethod
     def discord_token():
-        return SecretData.config_data().get("discord_token")
-    
+        SecretData.config_data()
+        val = getenv("discord_token")
+        if not val:
+            print("No Twitch token found, can not start up Discord Bot.")
+            return None
+        else: return val
+
     @staticmethod
     def twitch_token():
-        return SecretData.config_data().get("twitch_token")
+        SecretData.config_data()
+        val = getenv("twitch_token")
+        if not val:
+            print("No Twitch token found, can not start up Twitch Bot.")
+            return None
+        else: return val
     
     # @staticmethod
     # def twitch_data() -> Iterable[str, str, str]:

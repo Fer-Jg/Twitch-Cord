@@ -30,11 +30,14 @@ class TwitchBot(tcommands.Bot):
             if filename.endswith('.py'):
                 self.load_module(f'{tcog}.{filename[:-3]}')
                 print(f'Loaded cog: {filename[:-3]}')
-        print(f'''----------------------------------
-                \r|Logged in as | {self.nick}
-                \r|User id is | {self.user_id}
-                \r|Listening to: {self.channels}
-                \r----------------------------------''')
+        print(f'''
+        ---------------------
+        | Twitch Ready!
+        | Name > {self.nick}
+        | ID > {self.user_id}
+        | Channels > {self.channels}
+        ---------------------
+        ''')
     
     # async def event_message(self, message : tmessage.Message):
     #     if message.echo: return

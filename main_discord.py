@@ -48,7 +48,14 @@ class DiscordBot(dcommands.Bot):
                                     details=f"con {self.streamer.name}",
                                     url=self.streamer.link)
         await self.change_presence(activity=activity)
-        print("bot is ready")
+        print(f'''
+        ---------------------
+        | Discord Ready!
+        | ID > {self.user.id}
+        | Name > {self.user.name}
+        | Guilds > {[guild.name for guild in self.guilds]}
+        ---------------------
+        ''')
 
     async def on_command_before_invoke(self, ctx : dcommands.Context) -> None:
         if not ctx.bot.bot_ready: raise BotNotReady

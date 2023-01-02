@@ -4,3 +4,12 @@ testing.py
 utils/profile_pic.png
 configurations/streamer_info.yaml
 **/*.pyc
+
+# File for environment variables (basically... bot tokens)
+**/.env
+# venv stuff
+*env/**
+
+#People i wll code for uwu
+my_streamers.txt
+streamer_things/profile_pic.png
