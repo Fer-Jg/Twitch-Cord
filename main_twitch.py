@@ -44,10 +44,6 @@ class TwitchBot(tcommands.Bot):
     #         if self.bridge.d_test_channel else self.discord_link), message=message.content)
     #     await self.handle_commands(message)
 
-    @tcommands.command()
-    async def ping(self, ctx: tcommands.Context):
-        await ctx.send(f'PONG! {ctx.author.name}!')
-
 if __name__ == "__main__":
     import asyncio
     bot = TwitchBot()
