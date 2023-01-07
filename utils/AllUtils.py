@@ -38,7 +38,7 @@ class SecretData():
         SecretData.config_data()
         val = getenv("discord_token")
         if not val:
-            print("No Twitch token found, can not start up Discord Bot.")
+            print("No Discord token found, can not start up Discord Bot.")
             return None
         else: return val
 

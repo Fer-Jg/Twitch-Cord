@@ -16,13 +16,5 @@ class General(dcommands.Cog):
         await self.bot.bridge.twitch_message(message=content)
         await ctx.reply("Message sent to Twitch :D")
 
-    @dcommands.command(name="embed")
-    async def emb(self, ctx):
-        embed = discord.Embed()
-
-        await ctx.send(embed=embed)
-        return
-
-
 async def setup(bot):
     await bot.add_cog(General(bot))
